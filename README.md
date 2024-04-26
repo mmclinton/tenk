@@ -5,22 +5,45 @@ This tool was designed to increase the efficiency of retrieving a company's 10-k
 
 ## Installation
 
-1. **Clone the Repository**:
+Before using TENK, make sure you have the following dependencies installed on your system:
+- Go (version 1.21.8 or higher)
+- An API key from [Financial Modeling Prep](https://site.financialmodelingprep.com/)
+- `make` <br>
+
+1. **Clone the Repository**: <br>
    Clone the repository to your local machine using the following command:
    ```shell
    git clone https://github.com/mmclinton/tenk.git
+   ```
 
-2. **Navigate to the Repository**:
+2. **Navigate to the Repository**: <br>
    Change into the directory where you downloaded the repository:
    ```shell
    cd tenk
+   ```
 
-3. **Set Up Your Api Key:**:
-   You need to obtain an API key from google.com to use this tool. Once you have obtained your API key, insert it into the following command and run it:
+3. **Set Up Your Api Key**: <br>
+   You need to obtain an API key from [Financial Modeling Prep](https://site.financialmodelingprep.com/) to use this tool. Once you have obtained your API key, insert it into the following command and run it:
    ```shell
    make api_key="<YOUR API KEY HERE>"
    ```
    This command creates a configuration file (config.json) in the directory ~/.config/tenk with your API key. If something goes wrong during the setup process or if your API key changes later, you can edit the API key directly in the config.json file located in ~/.config/tenk.
+
+## Usage
+Using TENK is simple. You'll invoke tenk with a series of flags from within your shell. Please see the flags you can use below. You must utilize the `-company` and `-year` flags, seeing as a query cannot be made without this specific information.
+
+**Usage of TENK**:<br>
+  `-open`<br>
+      Designate to automatically open the report in the default browser. This is optional. By default the requested report is returned to the shell. <br><br> 
+  `-ticker`<br>
+      Designate the desired US stock ticker symbol. This is required. <br><br>
+  `-year` <br>
+      Designate the desired year for the annual report. This is required. <br>
+
+Try TENK with this example:
+```shell
+tenk -ticker aapl -year 2023
+```
 
 ## Project Directory Structure
 Here's the directory structure of the project:
@@ -42,3 +65,7 @@ graph LR;
     utils --> openBrowser.go
     utils --> outputFormatter.go
     utils --> urlBuilder.go
+```
+
+## License
+This project is licensed under the [MIT License](LICENSE). 

@@ -12,7 +12,7 @@ import (
 func main() {
 	symbol := flag.String("ticker", "", "Designate the desired US stock ticker symbol.")
 	year := flag.Int("year", 0, "Designate the desired year for the annual report.")
-	open := flag.Bool("open", false, "Designate to automatically open the report in the default browser.")
+	open := flag.Bool("open", false, "Designate to automatically open the report in the default browser. By default the requested report is returned to the shell.")
 	flag.Parse()
 
 	currentYear := time.Now().Year()
