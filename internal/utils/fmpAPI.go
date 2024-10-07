@@ -42,17 +42,30 @@ func GetAnnualReportLink(url string) ([]SecFilings, error) {
 	return allAnnualReports, nil
 }
 
-func ParseYearAnnualReport(data []SecFilings, reportYear *int) (SecFilings, error) {
+func GetAnnualReports(data []SecFilings, reportYear *int) ([]SecFilings, error) {
+	if *reportYear == 0 {
+		return data, nil
+	}
+
 	for _, report := range data {
-		reportFilingDate, err := time.Parse("2006-01-02 15:04:05", report.Date)
+		reportFilingDate, err := GetYearFromDateString(report.Date)
 		if err != nil {
-			fmt.Println("Could not parse data:", err)
+			fmt.Println("Could not parse date:", err)
 		}
-		year := reportFilingDate.Year()
-		if year == *reportYear {
-			return report, nil
+		if reportFilingDate == *reportYear {
+			return []SecFilings{report}, nil
 		}
 	}
-	err := fmt.Errorf("this company did not file a 10-k for the year %v", *reportYear)
-	return SecFilings{}, err
+	return nil, fmt.Errorf("this company did not file a 10-k for the year %v", *reportYear)
+}
+
+func GetYearFromDateString(dateString string) (int, error) {
+	format := "2006-01-02 15:04:05"
+
+	parsedDate, err := time.Parse(format, dateString)
+	if err != nil {
+		return 0, fmt.Errorf("error parsing date: %v", err)
+	}
+
+	return parsedDate.Year(), nil
 }

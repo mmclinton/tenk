@@ -5,15 +5,31 @@ import (
 	"strings"
 )
 
-func FormatTerminalOutput(url string, year int) {
-	boxWidth := len(url) + 4 // 2 left 2 right
+func FormatTerminalOutput(reports []SecFilings) {
+	var output []string
+	longestLine := 0
 
-	fmt.Print("\n")
-	fmt.Printf("Here is the requested 10-k for the year %v\n", year)
-	fmt.Println("+" + strings.Repeat("-", boxWidth) + "+")
+	for _, report := range reports {
+		dateYear, err := GetYearFromDateString(report.Date)
+		if err != nil {
+			fmt.Println("Error parsing report date:", err)
+			continue
+		}
+		line := fmt.Sprintf("%v: %s", dateYear, report.Link)
+		output = append(output, line)
+
+		if len(line) > longestLine {
+			longestLine = len(line)
+		}
+	}
+	boxWidth := longestLine + 4
+	fmt.Println("\n+" + strings.Repeat("-", boxWidth) + "+")
 	fmt.Println("|" + strings.Repeat(" ", boxWidth) + "|")
-	// fmt.Println("|" + strings.Repeat(" ", (boxWidth/2)-2) + fmt.Sprint(year) + strings.Repeat(" ", (boxWidth/2)-1) + "|")
-	fmt.Printf("|  %s  |\n", url)
+
+	for _, line := range output {
+		fmt.Printf("|  %-*s  |\n", longestLine, line)
+	}
+
 	fmt.Println("|" + strings.Repeat(" ", boxWidth) + "|")
 	fmt.Println("+" + strings.Repeat("-", boxWidth) + "+")
 	fmt.Print("\n")

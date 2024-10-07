@@ -1,7 +1,7 @@
 # TENK
 
 ## Overview
-This tool was designed to increase the efficiency of retrieving a company's 10-k annual report. TENK offers a simple CLI alternative to the SEC's EDGAR tool. TENK only retrieves annual reports filed by a company for a specific year. The tool will retrieve any annual reports, if filed, for years dating back to 1996. You can search over 70,000 symbols.
+This tool was designed to increase the efficiency of retrieving a company's 10-k annual report. TENK offers a simple CLI alternative to the SEC's EDGAR tool. TENK will retrieve any annual reports, if filed, for years dating back to 1996. You can search over 70,000 symbols.
 
 ## Installation
 
@@ -30,15 +30,15 @@ Before using TENK, make sure you have the following dependencies installed on yo
    This command creates a configuration file (config.json) in the directory ~/.config/tenk with your API key. If something goes wrong during the setup process or if your API key changes later, you can edit the API key directly in the config.json file located in ~/.config/tenk.
 
 ## Usage
-Using TENK is simple. You'll invoke tenk with a series of flags from within your shell. Please see the flags you can use below. You must utilize the `-company` and `-year` flags, seeing as a query cannot be made without this specific information.
+Using TENK is simple. You'll invoke tenk with a series of flags from within your shell. You can see the flags and their descriptions below. You must utilize the `-ticker` flag, seeing as a query cannot be made without this information.
 
 **Usage of TENK**:<br>
-  `-open`<br>
-      Designate to automatically open the report in the default browser. This is optional. By default the requested report is returned to the shell. <br><br> 
   `-ticker`<br>
       Designate the desired US stock ticker symbol. This is required. <br><br>
   `-year` <br>
-      Designate the desired year for the annual report. This is required. <br>
+      Designate the desired year for the annual report. This is optional. If no year is given, all available annual reports are returned." <br>
+  `-open`<br>
+      Designate to automatically open the report in the default browser. This is optional. By default the requested report is returned to the shell. <br><br> 
 
 Try TENK with this example:
 ```shell
