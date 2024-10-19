@@ -31,19 +31,18 @@ func main() {
 		log.Fatalln("Error:", err)
 	}
 
+	if *open {
+		err = utils.OpenDefaultBrowser(reports[0].Link)
+		if err != nil {
+			fmt.Println("Error: There was an error automatically opening the browser.", err)
+		}
+		os.Exit(0)
+	}
+
 	if *year == 0 {
 		fmt.Printf("\nHere are the available 10-k reports for %v.", *symbol)
 		utils.FormatTerminalOutput(reports)
 	} else {
-		report := reports[0]
-		if *open {
-			err = utils.OpenDefaultBrowser(report.Link)
-			if err != nil {
-				fmt.Println("Error: There was an error automatically opening the browser.", err)
-			}
-			os.Exit(0)
-		}
-
 		fmt.Printf("\nHere is the requested 10-k for the year %v.", *year)
 		utils.FormatTerminalOutput(reports)
 	}
