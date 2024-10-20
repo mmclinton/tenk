@@ -1,5 +1,7 @@
 # TENK
 
+![Tenk image banner for README.md](./assets/tenk-github-readme-banner.jpg)
+
 ## Overview
 This tool was designed to increase the efficiency of retrieving a company's 10-k annual report. TENK offers a simple CLI alternative to the SEC's EDGAR tool. TENK will retrieve any annual reports, if filed, for years dating back to 1996. You can search over 70,000 symbols.
 
@@ -33,12 +35,12 @@ Before using TENK, make sure you have the following dependencies installed on yo
 Using TENK is simple. You'll invoke tenk with a series of flags from within your shell. You can see the flags and their descriptions below. You must utilize the `-ticker` flag, seeing as a query cannot be made without this information.
 
 **Usage of TENK**:<br>
-  `-ticker`<br>
-      Designate the desired US stock ticker symbol. This is required. <br><br>
-  `-year` <br>
-      Designate the desired year for the annual report. This is optional. If no year is given, all available annual reports are returned." <br>
-  `-open`<br>
-      Designate to automatically open the report in the default browser. This is optional. By default the requested report is returned to the shell. <br><br> 
+  `-ticker` *[required]*<br>
+      Designate the desired US stock ticker symbol.<br><br>
+  `-year` *[optional]*<br>
+      Designate the desired year for the annual report. If no year is given, all available annual reports are returned. <br><br>
+  `-open` *[optional]*<br>
+      Designate to automatically open the report in the default browser. By default the requested report is returned to the shell. <br><br> 
 
 Try TENK with this example:
 ```shell
