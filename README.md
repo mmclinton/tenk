@@ -53,6 +53,7 @@ Here's the directory structure of the project:
 ```mermaid
 graph LR;
     root[root]
+    root --> assets
     root --> cmd
     root --> config
     root --> internal
