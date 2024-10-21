@@ -32,12 +32,16 @@ func main() {
 	}
 
 	if *open {
-		err = utils.OpenDefaultBrowser(reports[0].Link)
-		if err != nil {
+		if *year == 0 {
+			fmt.Println("\n\033[31mWARNING: Please specify a year to utilize the '-open' flag.\033[0m")
+			fmt.Printf("\nHere are the available 10-k reports for %v.", *symbol)
+			utils.FormatTerminalOutput(reports)
+			os.Exit(0)
+		}
+
+		if err := utils.OpenDefaultBrowser(reports[0].Link); err != nil {
 			fmt.Println("Error: There was an error automatically opening the browser.", err)
 		}
-		utils.FormatTerminalOutput(reports)
-		os.Exit(0)
 	}
 
 	if *year == 0 {
