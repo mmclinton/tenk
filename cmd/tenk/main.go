@@ -36,6 +36,7 @@ func main() {
 		if err != nil {
 			fmt.Println("Error: There was an error automatically opening the browser.", err)
 		}
+		utils.FormatTerminalOutput(reports)
 		os.Exit(0)
 	}
 

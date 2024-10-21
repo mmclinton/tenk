@@ -2,7 +2,6 @@ package config
 
 import (
 	"encoding/json"
-	"io"
 	"os"
 	"path/filepath"
 )
@@ -18,14 +17,10 @@ func ReadConfig() (*Config, error) {
 	if err != nil {
 		return nil, err
 	}
-
-	data, err := io.ReadAll(f)
-	if err != nil {
-		return nil, err
-	}
+	defer f.Close()
 
 	var config Config
-	if err := json.Unmarshal(data, &config); err != nil {
+	if err := json.NewDecoder(f).Decode(&config); err != nil {
 		return nil, err
 	}
 
