@@ -5,6 +5,11 @@ import (
 	"strings"
 )
 
+const (
+	resetColor = "\033[0m"
+	cyanColor  = "\033[36m"
+)
+
 func FormatTerminalOutput(reports []SecFilings) {
 	var output []string
 	longestLine := 0
@@ -22,12 +27,17 @@ func FormatTerminalOutput(reports []SecFilings) {
 			longestLine = len(line)
 		}
 	}
+
 	boxWidth := longestLine + 4
 	fmt.Println("\n+" + strings.Repeat("-", boxWidth) + "+")
 	fmt.Println("|" + strings.Repeat(" ", boxWidth) + "|")
 
-	for _, line := range output {
-		fmt.Printf("|  %-*s  |\n", longestLine, line)
+	for i, line := range output {
+		if len(output) > 1 && i%2 == 1 {
+			fmt.Printf("|  %s%-*s%s  |\n", cyanColor, longestLine, line, resetColor)
+		} else {
+			fmt.Printf("|  %-*s  |\n", longestLine, line)
+		}
 	}
 
 	fmt.Println("|" + strings.Repeat(" ", boxWidth) + "|")

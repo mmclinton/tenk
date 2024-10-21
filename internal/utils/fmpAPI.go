@@ -47,16 +47,20 @@ func GetAnnualReports(data []SecFilings, reportYear *int) ([]SecFilings, error) 
 		return data, nil
 	}
 
+	var reportQue []SecFilings
 	for _, report := range data {
 		reportFilingDate, err := GetYearFromDateString(report.Date)
 		if err != nil {
 			fmt.Println("Could not parse date:", err)
 		}
 		if reportFilingDate == *reportYear {
-			return []SecFilings{report}, nil
+			reportQue = append(reportQue, report)
 		}
 	}
-	return nil, fmt.Errorf("this company did not file a 10-k for the year %v", *reportYear)
+	if len(reportQue) == 0 {
+		return nil, fmt.Errorf("this company did not file a 10-k for the year %v", *reportYear)
+	}
+	return reportQue, nil
 }
 
 func GetYearFromDateString(dateString string) (int, error) {
