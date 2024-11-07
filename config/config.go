@@ -4,6 +4,7 @@ import (
 	"encoding/json"
 	"os"
 	"path/filepath"
+	"runtime"
 )
 
 type Config struct {
@@ -11,9 +12,15 @@ type Config struct {
 }
 
 func ReadConfig() (*Config, error) {
-	configFile := filepath.Join(os.Getenv("HOME"), ".config", "tenk", "config.json")
+	var configPath string
 
-	f, err := os.Open(configFile)
+	if runtime.GOOS == "windows" {
+		configPath = filepath.Join(os.Getenv("USERPROFILE"), "AppData", "Local", "tenk", "config.json")
+	} else {
+		configPath = filepath.Join(os.Getenv("HOME"), ".config", "tenk", "config.json")
+	}
+
+	f, err := os.Open(configPath)
 	if err != nil {
 		return nil, err
 	}
