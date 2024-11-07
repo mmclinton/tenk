@@ -15,7 +15,7 @@ Before using TENK, make sure you have the following dependencies installed on yo
 ### Option 1: Download the Latest Release <br>
 
 1. **Download the Source Code:**<br>
-Go to the [latest release](https://github.com/mmclinton/tenk/releases/tag/v1.0.0) page and download the source code archive (available as `.zip` or `.tar.gz`). Extract the archive to your local machine.
+Go to the [latest release](https://github.com/mmclinton/tenk/releases/tag/v1.1.0) page and download the source code archive (available as `.zip` or `.tar.gz`). Extract the archive to your local machine.
 
 2. **Navigate to the Project Directory:**<br>
 ```shell
@@ -49,10 +49,14 @@ Using TENK is simple. You'll invoke TENK with a series of flags from within your
       Designate the desired year for the annual report. If no year is given, all available annual reports are returned. <br><br>
   `-open` *optional*
       Automatically open the report in the default browser. By default, the requested report is returned to the shell. <br><br> 
+  `-before` *optional*:
+      Return all annual reports before the specified year, including the year provided. This can be combined with `-after` to set a range. <br><br>
+  `-after` *optional*:
+      Return all annual reports after the specified year, including the year provided. This can be combined with `-after` to set a range.<br><br>
 
 Try TENK with this example:
 ```shell
-tenk -ticker aapl -year 2023
+tenk -ticker aapl -after 2015
 ```
 
 ## Project Directory Structure
@@ -76,7 +80,9 @@ graph LR;
     utils --> openBrowser.go
     utils --> outputFormatter.go
     utils --> urlBuilder.go
+    utils --> validateFlags.go
+
 ```
 
 ## License
-This project is licensed under the [MIT License](LICENSE). 
+This project is licensed under the [GLWTS License](LICENSE). 
