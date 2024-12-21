@@ -9,7 +9,7 @@ const (
 	ResetColor  = "\033[0m"
 	cyanColor   = "\033[36m"
 	ErrorColor  = "\033[31m"
-	defaultLine = "Sorry, that range did not return any results!"
+	defaultLine = "Sorry, unable to return any reports for the given input"
 )
 
 // why not add some abstraction while we're at it
@@ -65,7 +65,7 @@ func getReportRange(reports []SecFilings, before *int, after *int, longestLine i
 	}
 
 	if len(output) == 0 {
-		longestLine = 45
+		longestLine = len(defaultLine)
 		output = append(output, ErrorColor+defaultLine+ResetColor)
 	}
 
